@@ -22,24 +22,24 @@ public class Movie {
         this.id = id;
     }
 
-        public Long getTitle(){
-        return id;
+    public String getTitle(){
+        return title;
     }
 
     public void setTitle(String title){
         this.title = title;
     }
 
-            public Long getReleaseDate(){
-        return id;
+    public String getReleaseDate(){
+        return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate){
         this.releaseDate = releaseDate;
     }
 
-    public Long getDuration(){
-        return id;
+    public int getDuration(){
+        return duration;
     }
 
     public void setDuration(int duration){

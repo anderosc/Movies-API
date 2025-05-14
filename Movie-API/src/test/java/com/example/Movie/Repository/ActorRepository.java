@@ -1,5 +1,9 @@
+package com.example.Movie.Repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class ActorRepository {
-    
+import com.example.Movie.model.Actor;
+
+interface ActorRepository extends JpaRepository<Actor, Long> {
+
 }
