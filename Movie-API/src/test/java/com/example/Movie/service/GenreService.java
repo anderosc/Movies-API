@@ -1,5 +1,7 @@
 package com.example.Movie.service;
 import com.example.Movie.Repository.GenreRepository;
+import com.example.Movie.model.Genre;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
