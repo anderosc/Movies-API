@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
+
+    
     //Helper methods to add features beyond the given JpaRepository ones
     Page<Movie> findByGenresId(Long genreId, Pageable pageable);
     Page<Movie> findByActorsId(Long actorId, Pageable pageable);

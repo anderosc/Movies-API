@@ -25,7 +25,7 @@ public class ActorService {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
-    private ObjectMapper jacksonObjectMapper; //Using objectmapper in the update method
+    private ObjectMapper jacksonObjectMapper; 
 
     //Method to create an actor with associated movies
     @Transactional

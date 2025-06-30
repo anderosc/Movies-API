@@ -16,7 +16,8 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Handles validation exceptions when @Valid fails. Collects all field errors and returns them all together
+    // Handles validation exceptions when @Valid fails. 
+    //Collects all field errors and returns them all together
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
