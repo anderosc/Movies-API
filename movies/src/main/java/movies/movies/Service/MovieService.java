@@ -87,11 +87,14 @@ public class MovieService {
     }
     //Method to get all the actors in a specific movie with pagination
     public Page<Actor> getAllActorsInMovie(Long movieId, Pageable pageable) {
-        if (!movieRepository.existsById(movieId)) { //Firstly checks if the movie exists in the movie repository
+        if (!movieRepository.existsById(movieId)) {
+     //Firstly checks if the movie exists in the movie repository
             throw new ResourceNotFoundException("Movie not found with id: " + movieId);
         }
-        Page<Actor> actors = actorRepository.findByMoviesId(movieId, pageable); //If movie exists then calls the actor list from the actor repository
-        if (actors.isEmpty()) { //Throws an exception if no actors have been associated with the given movie
+        Page<Actor> actors = actorRepository.findByMoviesId(movieId, pageable); 
+    //If movie exists then calls the actor list from the actor repository
+        if (actors.isEmpty()) { 
+    //Throws an exception if no actors have been associated with the given movie
             throw new ResourceNotFoundException("No associated actors found for movie with id: " + movieId);
         }
         return actors;
@@ -102,11 +105,14 @@ public class MovieService {
     public Optional<Movie> updateMovie(Long id, Map<String, Object> updates) {
         Movie existingMovie = movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
+
+        
         /*
         Using objectmapper to convert the input query's JSON body to a map and use it to confirm if the user is trying to clear the existing
         associations or if they don't want to update the associations
          */
         Movie updatedMovie = jacksonObjectMapper.convertValue(updates, Movie.class);
+
 
         //Update the movie properties if provided
         if (updatedMovie.getTitle() != null) {
@@ -134,6 +140,7 @@ public class MovieService {
             existingMovie.getGenres().addAll(updatedGenres);
         }
 
+
         //Update the associated actors if provided
         if (updates.containsKey("actors") && updatedMovie.getActors().isEmpty()) { //If the "actors" field exists in the given JSON body and its empty then it clears associations
             existingMovie.getActors().clear();
@@ -151,6 +158,7 @@ public class MovieService {
         return Optional.of(existingMovie);
     }
 
+    
     //Method to delete a movie and throw an exception if movie isn't found or it has associated genres or actors
     @Transactional
     public void deleteMovie(Long id, boolean force) {

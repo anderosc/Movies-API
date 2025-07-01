@@ -37,6 +37,7 @@ public class Movie {
 
 
     @JsonIgnoreProperties("movies")  //Prevents infinite recursion during JSON serialization
+    @NotEmpty
     @ManyToMany
     @OrderBy("name ASC") //Sorting the genres alphabetically
     @JoinTable(
