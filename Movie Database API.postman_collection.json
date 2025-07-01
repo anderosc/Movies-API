@@ -79,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"birthDate\": \"\",\r\n    \"movies\": []\r\n}",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"birthDate\": \"\",\r\n    \"movies\": [{\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,7 +129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"birthDate\": \"\",\r\n    \"movies\": []\r\n}",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"birthDate\": \"\",\r\n    \"movies\": [{\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +137,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/actors/{id}",
+							"raw": "http://localhost:8080/api/actors/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -146,7 +146,7 @@
 							"path": [
 								"api",
 								"actors",
-								"{id}"
+								"15"
 							]
 						}
 					},
@@ -158,7 +158,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/actors/search?name={actorName}",
+							"raw": "http://localhost:8080/api/actors/search?name=Angelina",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -172,7 +172,7 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "{actorName}"
+									"value": "Angelina"
 								}
 							]
 						}
@@ -222,7 +222,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/genres/{id}",
+							"raw": "http://localhost:8080/api/genres/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -231,7 +231,7 @@
 							"path": [
 								"api",
 								"genres",
-								"{id}"
+								"1"
 							]
 						}
 					},
@@ -243,7 +243,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/genres/{id}",
+							"raw": "http://localhost:8080/api/genres/04",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -252,7 +252,7 @@
 							"path": [
 								"api",
 								"genres",
-								"{id}"
+								"04"
 							]
 						}
 					},
@@ -265,7 +265,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"movies\": []\r\n}",
+							"raw": "{\r\n    \"name\": \"sComedy\",\r\n    \"movies\": [{\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -294,7 +294,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"movies\": []\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Drama\",\r\n    \"movies\": [{\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -302,7 +302,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/genres/{id}",
+							"raw": "http://localhost:8080/api/genres/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -311,7 +311,7 @@
 							"path": [
 								"api",
 								"genres",
-								"{id}"
+								"1"
 							]
 						}
 					},
@@ -348,7 +348,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/movies/{id}",
+							"raw": "http://localhost:8080/api/movies/18",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -357,7 +357,7 @@
 							"path": [
 								"api",
 								"movies",
-								"{id}"
+								"18"
 							]
 						}
 					},
@@ -368,8 +368,17 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/api/movies?id=15",
+							"raw": "http://localhost:8080/api/movies/22",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -377,13 +386,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"movies"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "15"
-								}
+								"movies",
+								"22"
 							]
 						}
 					},
@@ -396,7 +400,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"\",\r\n    \"releaseYear\": ,\r\n    \"duration\": ,\r\n    \"genres\": [],\r\n    \"actors\": []\r\n}",
+							"raw": "{\r\n     \"title\": \"Titanic\",\r\n    \"releaseYear\": 1997,\r\n    \"duration\": 195,\r\n    \"genres\": [{\"id\": 2}, {\"id\": 1}],\r\n    \"actors\": [{\"id\": 2}, {\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -425,7 +429,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"title\": \"\",\r\n   \"releaseYear\": 0,\r\n   \"duration\": 0,\r\n   \"genres\": [],\r\n   \"actors\": []\r\n}",
+							"raw": "{\r\n    \"title\": \"Movie Name Here\",\r\n    \"releaseYear\": 1997,\r\n    \"duration\": 195,\r\n    \"genres\": [{\"id\": 2}, {\"id\": 1}],\r\n    \"actors\": [{\"id\": 2}, {\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -433,7 +437,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/movies/{id}",
+							"raw": "http://localhost:8080/api/movies/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -442,7 +446,7 @@
 							"path": [
 								"api",
 								"movies",
-								"{id}"
+								"1"
 							]
 						}
 					},
