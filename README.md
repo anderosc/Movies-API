@@ -48,7 +48,7 @@ Example:
 ```
 {
     "title": "Titanic",
-    "releaseYear": 2005,
+    "releaseYear": 1997,
     "duration": 145,
     "genres": [{"id" : 3}],
     "actors": [{"id" : 3}]
@@ -92,6 +92,7 @@ Example:
 - **GET** /api/actors?name={name} — Filter actors by name (partial match)  
 - **PATCH** /api/actors/{id} — Partially update actor details  
 - **DELETE** /api/actors/{id}?force=true — Delete actor (with force)
+
 
 
 ### General Search
