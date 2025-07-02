@@ -8,7 +8,7 @@ A REST API for managing a movie database built with **Spring Boot**
 This project provides a clean and well-structured API for:
 
 - Managing **movies**, **genres**, and **actors**
-- Searching and filtering movies by **genre**, **release year**, or **actor**
+- Searching and filtering movies by **genre**, **release year**,  **actor**
 - Handling complex **many-to-many relationships**
 - Supporting **CRUD operations** with **input validation** and **custom error handling**
 - Offering **pagination**, **search**, and **force deletion** options for enhanced control
@@ -47,7 +47,7 @@ You can see different endpoints with sample data to test the application.
 Example:
 ```
 {
-    "title": "atesti",
+    "title": "Titanic",
     "releaseYear": 2005,
     "duration": 145,
     "genres": [{"id" : 3}],
