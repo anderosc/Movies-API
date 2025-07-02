@@ -45,6 +45,7 @@ Open your Postman and import Movie Database API.postman_collection.json
 You can see different endpoints with sample data to test the application.
 
 Example:
+```
 {
     "title": "atesti",
     "releaseYear": 2005,
@@ -52,7 +53,7 @@ Example:
     "genres": [{"id" : 3}],
     "actors": [{"id" : 3}]
 }
-
+```
 ---
 ### Base Endpoints
 
