@@ -1,6 +1,5 @@
 package movies.movies.Service;
 
-import movies.movies.Entity.Actor;
 import movies.movies.Entity.Genre;
 import movies.movies.Entity.Movie;
 
