@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/actors",
+							"raw": "http://localhost:8080/api/search?query={searchTerm}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,7 +23,13 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"actors"
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{searchTerm}"
+								}
 							]
 						}
 					},
@@ -265,7 +271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"sComedy\",\r\n    \"movies\": [{\"id\": 2}]\r\n}",
+							"raw": "{\r\n    \"name\": \"Comedy\",\r\n    \"movies\": [{\"id\": 2}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -454,9 +460,21 @@
 				},
 				{
 					"name": "Get movies by release year",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/api/movies?year={releaseYear}",
 							"protocol": "http",
@@ -551,6 +569,37 @@
 								{
 									"key": "title",
 									"value": "{movieTitle}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search request",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/search?query={searchTerm}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{searchTerm}"
 								}
 							]
 						}

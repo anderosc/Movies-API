@@ -47,7 +47,7 @@ public class MovieController {
             @RequestParam(required = false) Long genre,
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Long actor,
-            @PageableDefault(sort = "title", direction = Sort.Direction.ASC) Pageable pageable,
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "10") int size) {
         // Check that page number is not negative

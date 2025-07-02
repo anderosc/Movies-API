@@ -17,21 +17,20 @@ import java.util.Set;
 @Table(name = "tbl_genre")
 public class Genre {
 
-    //Marks this as the primary key, and automatically generates the id value
+    // Primary key for the table, ID is generated automatically
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //I've chosen to only allow unique names in the database
+    // Genre name must be unique, not blank, and between 1–20 characters
     @Column(unique = true)
     @NotBlank(message = "Name must not be null / blank")
     @Size(min = 1, max = 20, message = "Genre name must be between 1 and 20 characters")
     private String name;
 
-    /*
-    Prevents infinite recursion during JSON serialization,
-    and I've chosen not to show actors in genre related tables
-     */
+    // Many-to-many relationship with movies
+    // Ignores the 'genres' and 'actors' fields when converting to JSON to prevent infinite loops
+    // Movies are sorted by title in ascending order
     @JsonIgnoreProperties({"genres", "actors"})
     @OrderBy("title ASC") //Sorting the movies alphabetically
     @ManyToMany(mappedBy = "genres")

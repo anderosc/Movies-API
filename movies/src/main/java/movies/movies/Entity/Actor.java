@@ -25,37 +25,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 
-
-
-
-
 @Getter //Lombok annotations to automatically generate getters and setters
 @Setter
 @Entity //Marks this class as a JPA entity
 @Table(name = "tbl_actor")
 public class Actor {
 
-    //Marks this as the primary key, and automatically generates the id value
+    // Primary key, auto-generated
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //I've chosen to only allow unique names in the database
+    // Name must be unique, not blank, and 3–50 characters long
     @Column(unique = true)
     @NotBlank(message = "Name must not be null / blank")
     @Size(min = 3, max = 50, message = "Actor name must be between 3 and 50 characters")
     private String name;
 
-    //Specifying the date format to catch and better handle invalid birthDate inputs
+    // Date of birth must be provided and must be in the past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Date of birth must not be null")
     @Past(message = "Date of birth must be in the past")
     private LocalDate birthDate;
 
-    /*
-    Prevents infinite recursion during JSON serialization,
-    and I've chosen not to show genres in actor related tables
-     */
+    // Many-to-many relationship with movies
+    // Prevents infinite loops when converting to JSON
+    // Does not show 'genres' or 'actors' inside movies
+    // Movies are listed in alphabetical order by title
     @JsonIgnoreProperties({"actors", "genres"})
     @OrderBy("title ASC") //Sorting the movies alphabetically
     @ManyToMany(mappedBy = "actors")

@@ -60,10 +60,9 @@ public class ActorService {
     public Optional<Actor> updateActor(Long id, Map<String, Object> updates) {
         Actor existingActor = actorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Actor not found with id: " + id));
-        /*
-        Using objectmapper to convert the input query's JSON body to a map and use it to confirm if the user is trying to clear the existing
-        associations or if they don't want to update the associations
-         */
+
+
+        // Convert incoming raw map to Actor object (used for extracting updated fields)
         Actor updatedActor = jacksonObjectMapper.convertValue(updates, Actor.class);
         //Update actor properties only if they're provided
         if (updatedActor.getName() != null) {

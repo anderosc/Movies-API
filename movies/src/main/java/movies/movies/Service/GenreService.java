@@ -1,5 +1,6 @@
 package movies.movies.Service;
 
+import movies.movies.Entity.Actor;
 import movies.movies.Entity.Genre;
 import movies.movies.Entity.Movie;
 
@@ -28,21 +29,21 @@ public class GenreService {
     @Autowired
     private ObjectMapper jacksonObjectMapper; //Using objectmapper in the update method
 
-    //Method to create a genre with it's associated movies
+    //Creates a new Genre and links it with existing movies if provided
     @Transactional
     public Genre createGenre (Genre genre) {
-        if (!genre.getMovies().isEmpty()) { //Checks if the associated movies exist and throws an exception if not
+        if (!genre.getMovies().isEmpty()) { // Check that each associated movie exists and update their genre references
             Set<Movie> existingMovies = new HashSet<>();
             for (Movie movie : genre.getMovies()) {
                 Movie existingMovie = movieRepository.findById(movie.getId())
                         .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + movie.getId()));
                 existingMovies.add(existingMovie); //Adds the movie to the new set
-                existingMovie.getGenres().add(genre); //Adds the new genre to the existing movie
+                existingMovie.getGenres().add(genre); ///Link this genre to the movie
             }
             genre.setMovies(existingMovies); //Sets the movies to the genre
         }
         genre.setName(genre.getName().trim()); // Trim blank spaces in front and back of the name
-        return genreRepository.save(genre);
+        return genreRepository.save(genre); // Save to database
     }
 
     //Method to get all genres with pagination
@@ -61,29 +62,35 @@ public class GenreService {
     public Optional<Genre> updateGenre(Long id, Map<String, Object> updates){
      Genre existingGenre = genreRepository.findById(id)
              .orElseThrow(() -> new ResourceNotFoundException("Genre not found with id: " + id));
-     /*
-     Using objectmapper to convert the input query's JSON body to a map and use it to confirm if the user is trying to clear the existing
-     associations or if they don't want to update the associations
-     */
+
+
+    // Convert incoming raw map to Genre object (used for extracting updated fields)
      Genre updatedGenre = jacksonObjectMapper.convertValue(updates, Genre.class);
-     //Update genre name only if it's provided
+     //If a new name is provided, update it 
      if (updatedGenre.getName() != null) {
          existingGenre.setName(updatedGenre.getName().trim());
      }
 
-     //Update the associated movies if provided
+        /*
+         * Handle movie associations:
+         * If "movies" field exists and is empty → clear all associations.
+         * Else → validate and update new movie associations.
+         */   
         if (updates.containsKey("movies") && updatedGenre.getMovies().isEmpty()) { //If the "movies" field exists in the given JSON body and it is empty then it clears the associations
             existingGenre.getMovies().clear();
         }
-        else if (!updatedGenre.getMovies().isEmpty()) { //If the "movies" field isnt empty in the JSON body then checks if the movies exist
+        else if (!updatedGenre.getMovies().isEmpty()) {
+             //If the "movies" field isnt empty in the JSON body then checks if the movies exist
          Set<Movie> updatedMovies = new HashSet<>();
-         for (Movie movie : updatedGenre.getMovies()) { //Check if the given associated movies exist and throw an exception if not
+
+         for (Movie movie : updatedGenre.getMovies()) { 
+            //Check if the given associated movies exist and throw an exception if not
              Movie existingMovie = movieRepository.findById(movie.getId())
                      .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + movie.getId()));
              updatedMovies.add(existingMovie);
          }
 
-         //Remove the genre from movies NOT in the updated list
+         // Remove this genre from movies that are no longer associated         
          for (Movie movie : existingGenre.getMovies()) {
              if (!updatedMovies.contains(movie)) {
                  movie.getGenres().remove(existingGenre);
@@ -102,6 +109,15 @@ public class GenreService {
      return Optional.of(savedGenre);
     }
 
+        //Method to find actors by name (case-insensitive and partial match)
+    public Page<Genre> findByName(String name, Pageable pageable) {
+        Page<Genre> genre = genreRepository.findByNameContainingIgnoreCase(name, pageable);
+        if (genre.isEmpty()) {
+            throw new ResourceNotFoundException("No genres found with name containing: " + name);
+        }
+        return genre;
+    }
+
     //Method to delete a genre and throw an exception if it isn't found or it has associated movies
     @Transactional
     public void deleteGenre(Long id, boolean force) {
@@ -118,5 +134,6 @@ public class GenreService {
         }
         genreRepository.delete(genre);
     }
+
 
 }

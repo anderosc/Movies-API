@@ -42,9 +42,11 @@ public class MovieService {
                 existingActors.add(existingActor); //If actor is found then it's added to the new set
                 existingActor.getMovies().add(movie); //Adds the new movie to the existing actor
             }
-            movie.setActors(existingActors); //Sets the actors to the new movie
+            movie.setActors(existingActors); 
+            //Sets the actors to the new movie
         }
-        if (!movie.getGenres().isEmpty()) { //Checks if the associated genres exist and throws an exception if not
+        if (!movie.getGenres().isEmpty()) {
+            //Checks if the associated genres exist and throws an exception if not
             Set<Genre> existingGenres = new HashSet<>();
             for (Genre genre : movie.getGenres()) {
                 Genre existingGenre = genreRepository.findById(genre.getId())
@@ -107,10 +109,9 @@ public class MovieService {
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
 
         
-        /*
-        Using objectmapper to convert the input query's JSON body to a map and use it to confirm if the user is trying to clear the existing
-        associations or if they don't want to update the associations
-         */
+    
+        // Convert incoming raw map to Movie object (used for extracting updated fields)
+
         Movie updatedMovie = jacksonObjectMapper.convertValue(updates, Movie.class);
 
 
