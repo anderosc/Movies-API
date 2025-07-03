@@ -36,6 +36,14 @@ This project provides a clean and well-structured API for:
 Use Spring Boot Dashboard extencion in VSCode.
 Start the application
 
+OR
+
+```
+cd movies
+mvn clean install
+mvn spring-boot:run
+```
+
 
 ## Testing
 1. **Use Postman**
